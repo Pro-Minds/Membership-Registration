@@ -8,6 +8,8 @@ import Header from './components/templates/Header';
 import Body from './components/templates/Body';
 import Footer from './components/templates/Footer';
 import RegisterAdmin from './pages/RegisterAdmin'; 
+import Subscription from './components/member/SubscriptionPlans'; 
+
 import './App.css';
 
 function App() {
@@ -18,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Body />} /> {/* Default route */}
           <Route path="/admin/register" element={<RegisterAdmin />} /> {/* Route for registration */}
+          <Route path="/subscription" element={<Subscription />} /> {/* Route for registration */}
           <Route path="/register" element={<RegistrationForm />} />
           <Route path="/login" element={<SignIn />} />
         </Routes>
