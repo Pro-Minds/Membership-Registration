@@ -1,11 +1,20 @@
-const mongoose = require('mongoose');
+// models/Admin.js
+const pool = require('../config/db');
 
-const adminSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  phone: { type: String, required: true },
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-});
+class Admin {
+  static async create(adminData) {
+    const { name, email, phone, username, password } = adminData;
+    const result = await pool.query(
+      'INSERT INTO admins (name, email, phone, username, password) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [name, email, phone, username, password]
+    );
+    return result.rows[0];
+  }
 
-module.exports = mongoose.model('Admin', adminSchema);
+  static async findByEmail(email) {
+    const result = await pool.query('SELECT * FROM admins WHERE email = $1', [email]);
+    return result.rows[0];
+  }
+}
+
+module.exports = Admin;

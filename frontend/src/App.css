@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.logo-container {
+  text-align: center; /* Center the logo container */
+  margin-bottom: 20px; /* Add some margin to the bottom of the logo container */
+}
+
+.logo {
+  width: 100px; /* Set the width of the logo */
+  height: 100px; /* Set the height of the logo */
+  border-radius: 50%; /* Make the logo round */
+  margin: 0 auto;
+}

@@ -1,53 +1,43 @@
+// controllers/authController.js
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const Admin = require('../models/Admin');
-const bcrypt = require('bcryptjs');
 
 exports.registerAdmin = async (req, res) => {
-  const { name, email, phone, username, password } = req.body;
-
   try {
-    // Check if email or username already exists
-    const existingAdmin = await Admin.findOne({ $or: [{ email }, { username }] });
+    const { name, email, phone, username, password } = req.body;
+
+    // Check if admin already exists
+    const existingAdmin = await Admin.findByEmail(email);
     if (existingAdmin) {
-      return res.status(400).json({ message: 'Email or username already exists' });
+      return res.status(400).json({ message: 'Admin already exists' });
     }
 
-    // Hash password
+    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create new admin
-    const newAdmin = new Admin({
-      name,
-      email,
-      phone,
-      username,
-      password: hashedPassword,
-    });
-
-    await newAdmin.save();
-    res.status(201).json({ message: 'Admin registered successfully' });
+    const newAdmin = await Admin.create({ name, email, phone, username, password: hashedPassword });
+    res.status(201).json(newAdmin);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: 'Server error' });
   }
 };
 
 exports.loginAdmin = async (req, res) => {
-  const { email, password } = req.body;
-
   try {
-    // Find admin by email
-    const admin = await Admin.findOne({ email });
-    if (!admin) {
-      return res.status(400).json({ message: 'Invalid email or password' });
+    const { email, password } = req.body;
+    const admin = await Admin.findByEmail(email);
+    
+    if (!admin || !(await bcrypt.compare(password, admin.password))) {
+      return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    // Check password
-    const isPasswordValid = await bcrypt.compare(password, admin.password);
-    if (!isPasswordValid) {
-      return res.status(400).json({ message: 'Invalid email or password' });
-    }
-
-    res.status(200).json({ message: 'Login successful', admin });
+    const token = jwt.sign({ id: admin.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.json({ token });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: 'Server error' });
   }
 };
