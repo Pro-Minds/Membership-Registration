@@ -2,7 +2,8 @@
     "compilerOptions": {
       "target": "es5",                          // Target ES5 for compatibility
       "lib": ["dom", "es6"],                    // Include DOM and ES6 for type checking
-      "jsx": "react",                           // This is required for JSX/TSX support
+      "jsx": "react", 
+      "jsx": "react-jsx" ,                         // This is required for JSX/TSX support
       "moduleResolution": "node",               // Resolve modules in Node.js style
       "esModuleInterop": true,                  // For compatibility with default imports
       "strict": true,                           // Enable strict type-checking
