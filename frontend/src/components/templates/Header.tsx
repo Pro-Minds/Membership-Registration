@@ -11,9 +11,7 @@ const Header: React.FC = () => {
   return (
     <header className="header">
       <div className="header-container">
-        <div className="logo">
-          <img src="/logo.png" alt="Logo" />
-        </div>
+        
         <nav className={`nav ${isMenuOpen ? 'open' : ''}`}>
           <ul>
             <li><a href="/">Home</a></li>

@@ -1,19 +1,21 @@
 import React from 'react';
-import Header from './components/templates/Header';
-import Footer from './components/templates/Footer';
-import RegistrationForm from './components/member/RegistrationForm'; // Import RegistrationForm component
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Home from './components/templates/Home';
+import RegistrationForm from './components/member/RegistrationForm';
+import SignIn from './components/member/SignIn';
 
 function App() {
   return (
-    <div className="App">
-      <Header /> {/* Render Header component */}
-      <div className="logo-container">
-        <img src="/logo.png" alt="" className="logo" />
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<RegistrationForm />} />
+          <Route path="/login" element={<SignIn />} />
+        </Routes>
       </div>
-      <RegistrationForm /> {/* Render RegistrationForm component */}
-      <Footer /> {/* Render Footer component */}
-    </div>
+    </Router>
   );
 }
 

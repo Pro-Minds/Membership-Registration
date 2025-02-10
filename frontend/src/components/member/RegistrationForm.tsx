@@ -1,12 +1,14 @@
-// RegistrationForm.tsx
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './RegistrationForm.css';
 import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
+
 const RegistrationForm: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,12 +16,17 @@ const RegistrationForm: React.FC = () => {
       alert('Passwords do not match!');
       return;
     }
+    if (password.length < 8) {
+      alert('Password must be at least 8 characters long!');
+      return;
+    }
     console.log({ name, email, password });
+    // Here you would typically send the data to your backend
   };
 
   return (
     <div className="registration-container">
-          <div className="RegistrationForm"></div>
+      <div className="RegistrationForm"></div>
       <div className="registration-form">
         <h1 className="organization-name">MOUNTAIN TECH</h1>
         <h2>Glad to see you!</h2>
@@ -62,7 +69,8 @@ const RegistrationForm: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                placeholder="Password"
+                placeholder="Password (min 8 characters)"
+                minLength={8}
               />
             </div>
           </div>
@@ -81,10 +89,22 @@ const RegistrationForm: React.FC = () => {
             </div>
           </div>
           <div className="terms">
-            <input type="checkbox" required /> I read and agree to <a href="#">Terms & Conditions</a>
+            <input 
+              type="checkbox" 
+              required 
+              checked={termsAccepted}
+              onChange={(e) => setTermsAccepted(e.target.checked)}
+            /> 
+            I read and agree to <a href="#">Terms & Conditions</a>
           </div>
-          <button type="submit" className="submit-button">Create Account</button>
-          <p>Already have an account? <a href="#">Sign in</a></p>
+          <button 
+            type="submit" 
+            className="submit-button"
+            disabled={!termsAccepted}
+          >
+            Create Account
+          </button>
+          <p>Already have an account? <Link to="/login">Sign in</Link></p>
         </form>
       </div>
     </div>
