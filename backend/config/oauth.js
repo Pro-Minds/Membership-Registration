@@ -6,7 +6,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: '/auth/google/callback',
+      callbackURL: '/admin/auth/google/callback',
     },
     (accessToken, refreshToken, profile, done) => {
       // Handle user creation or login
@@ -14,5 +14,15 @@ passport.use(
     }
   )
 );
+
+// Serialize user into the session
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+// Deserialize user from the session
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
 
 module.exports = passport;

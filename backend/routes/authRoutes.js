@@ -1,21 +1,22 @@
+// authRoute.js
 const express = require('express');
-const passport = require('passport');
-const authController = require('../controllers/authController');
+const { registerAdmin, loginAdmin } = require('../controllers/authController');
+const passport = require('../config/oauth'); // Import OAuth configuration
 
 const router = express.Router();
 
-// Admin registration and login
-router.post('/admin/register', authController.registerAdmin);
-router.post('/admin/login', authController.loginAdmin);
+router.post('/register', registerAdmin);
+router.post('/login', loginAdmin);
 
-// Google OAuth2 routes
+// Google OAuth route
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-router.get(
-  '/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  (req, res) => {
-    // Successful authentication, redirect to admin dashboard
-    res.redirect('/admin/dashboard');
+
+// Google callback route
+router.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/' }),
+  async (req, res) => {
+    // Successful authentication, redirect or send response
+    res.redirect('/'); // Redirect to your frontend or dashboard
   }
 );
 
