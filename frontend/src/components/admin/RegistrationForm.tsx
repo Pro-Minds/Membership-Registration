@@ -107,11 +107,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, isLogin, 
         <button
           type="button"
           className="oauth-button google"
-          onClick={() => window.location.href = '/auth/google'}
+          onClick={() => window.location.href = 'http://localhost:5000/admin/auth/google'}
         >
           <i className="fab fa-google"></i> Google
         </button>
       </div>
+
     </form>
   );
 };
