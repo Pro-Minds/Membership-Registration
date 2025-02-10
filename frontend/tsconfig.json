@@ -1,16 +1,14 @@
 {
-    "compilerOptions": {
-      "target": "es5",                          // Target ES5 for compatibility
-      "lib": ["dom", "es6"],                    // Include DOM and ES6 for type checking
-      "jsx": "react",                           // This is required for JSX/TSX support
-      "moduleResolution": "node",               // Resolve modules in Node.js style
-      "esModuleInterop": true,                  // For compatibility with default imports
-      "strict": true,                           // Enable strict type-checking
-      "skipLibCheck": true,                     // Skip type checking of libraries (for faster builds)
-      "forceConsistentCasingInFileNames": true  // Enforce consistent file name casing
-    },
-    "include": [
-      "src/**/*"                                // Include all files in the 'src' folder
-    ]
-  }
-  
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "jsx": "react",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["jest", "@testing-library/jest-dom", "node"], // Add jest here
+    // Other options...
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
