@@ -11,10 +11,10 @@ const Header: React.FC = () => {
   return (
     <header className="header">
       <div className="header-container">
-        <div className="logo">
-          <img src="/logo.png" alt="Logo" />
-        </div>
         <nav className={`nav ${isMenuOpen ? 'open' : ''}`}>
+          <div className="logo">
+            <img src="/logo.png" alt="Logo" />
+          </div>
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
