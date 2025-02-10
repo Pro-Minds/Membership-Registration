@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import RegistrationForm from '../components/admin/RegistrationForm';
-import { registerAdmin, loginAdmin } from '../helpers/api';
+import { registerAdmin, loginAdmin } from '../helpers/index';
 
 const RegisterAdmin: React.FC = () => {
   const [isLogin, setIsLogin] = useState(false);
