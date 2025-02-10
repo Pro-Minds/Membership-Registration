@@ -36,6 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
 .logo-container {
   text-align: center; /* Center the logo container */
   margin-bottom: 20px; /* Add some margin to the bottom of the logo container */

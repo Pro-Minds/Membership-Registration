@@ -1,17 +1,19 @@
 {
-    "compilerOptions": {
-      "target": "es5",                          // Target ES5 for compatibility
-      "lib": ["dom", "es6"],                    // Include DOM and ES6 for type checking
-      "jsx": "react", 
-      "jsx": "react-jsx" ,                         // This is required for JSX/TSX support
-      "moduleResolution": "node",               // Resolve modules in Node.js style
-      "esModuleInterop": true,                  // For compatibility with default imports
-      "strict": true,                           // Enable strict type-checking
-      "skipLibCheck": true,                     // Skip type checking of libraries (for faster builds)
-      "forceConsistentCasingInFileNames": true  // Enforce consistent file name casing
-    },
-    "include": [
-      "src/**/*"                                // Include all files in the 'src' folder
-    ]
-  }
-  
+  "compilerOptions": {
+    "target": "es6",
+    "lib": ["dom", "es6"],
+    "module": "esnext",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@helpers/*": ["./src/helpers/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
